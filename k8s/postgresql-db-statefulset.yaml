@@ -44,9 +44,9 @@ spec:
             value: "pgadmin@slb.com"
           - name: "PGADMIN_SERVER_JSON"
             value: '{"host": "postgis", "port": 5432, "username": "unifier", "password": "unifier", "sslmode": "prefer", "db": "unified-db"}'
-        volumeMounts:
-          - mountPath: /var/lib/pgadmin
-            name: pg-admin   
+        # volumeMounts:
+        #   - mountPath: /var/lib/pgadmin
+        #     name: pg-admin   
   # Volume Claim
   volumeClaimTemplates:
   - metadata:
