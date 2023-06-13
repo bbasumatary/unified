@@ -35,7 +35,7 @@ spec:
       - name: pgadmin
         image: dpage/pgadmin4
         ports:
-          - containerPort: 5050
+          - containerPort: 80
             name: pdadmin
         env:
           - name: "PGADMIN_DEFAULT_PASSWORD"
