@@ -9,4 +9,8 @@ spec:
     app: pgdb
   ports:
   - port: 5432
+    name: pgdb-port
     targetPort: 5432
+  - port: 5050
+    name: pgadmin-port
+    targetPort: 5050
