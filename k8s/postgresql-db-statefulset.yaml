@@ -44,7 +44,7 @@ spec:
           runAsGroup: 0
         ports:
           - containerPort: 80
-            name: pdadmin
+            name: pgadmin
         # env from configmap
         envFrom:
           - configMapRef:
@@ -58,7 +58,8 @@ spec:
         #     value: '{"host": "localhost", "port": 5432, "username": "unifier", "password": "unifier", "sslmode": "prefer", "db": "unified-db"}'
         volumeMounts:
           - name: pg-admin
-            mountPath:  /var/lib/pgadmin
+            # mountPath:  /var/lib/pgadmin
+            mountPath: /data/pgadmin
   # Volume Claim
   volumeClaimTemplates:
   - metadata:
