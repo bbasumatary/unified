@@ -28,15 +28,6 @@ spec:
         envFrom:
           - configMapRef:
               name: pg-db-config
-        # env:
-        # - name: POSTGRES_USER
-        #   value: unifier
-        # - name: POSTGRES_PASSWORD
-        #   value: unifier
-        # - name: POSTGRES_DB
-        #   value: unified-db
-        # - name: PGDATA
-        #   value: /data/pgdata
       - name: pgadmin
         image: dpage/pgadmin4
         securityContext:
@@ -49,16 +40,8 @@ spec:
         envFrom:
           - configMapRef:
               name: pgadmin-config
-        # env:
-        #   - name: "PGADMIN_DEFAULT_PASSWORD"
-        #     value: "pgadmin"
-        #   - name: "PGADMIN_DEFAULT_EMAIL"
-        #     value: "pgadmin@slb.com"
-        #   - name: "PGADMIN_SERVER_JSON"
-        #     value: '{"host": "localhost", "port": 5432, "username": "unifier", "password": "unifier", "sslmode": "prefer", "db": "unified-db"}'
         volumeMounts:
           - name: pg-admin
-            # mountPath:  /var/lib/pgadmin
             mountPath: /data/pgadmin
   # Volume Claim
   volumeClaimTemplates:
