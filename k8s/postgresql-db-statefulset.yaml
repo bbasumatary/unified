@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: pg
+  name: pg-sfs
 spec:
   selector:
     matchLabels:
-      app: pg
+      app: pgdb
   serviceName: pg-service
   replicas: 1
   minReadySeconds: 60 # by default is 0
-  template:
+  template:   # template of a pod in the statefulset
     metadata:
       labels:
-        app: pg
+        app: pgdb
     spec:
       terminationGracePeriodSeconds: 60
       containers:
-      - name: pg
+      - name: postgis  # i can select any name here based on the container
         image: postgis/postgis:15-3.3
         ports:
         - containerPort: 5432
@@ -32,6 +32,21 @@ spec:
           value: unified-db
         - name: PGDATA
           value: /data/pgdata
+      - name: pgadmin
+        image: dpage/pgadmin4
+        ports:
+          - containerPort: 5050
+            name: pdadmin
+        env:
+          - name: "PGADMIN_DEFAULT_PASSWORD"
+            value: "pgadmin"
+          - name: "PGADMIN_DEFAULT_EMAIL"
+            value: "pgadmin@slb.com"
+          - name: "PGADMIN_SERVER_JSON"
+            value: '{"host": "postgis", "port": 5432, "username": "unifier", "password": "unifier", "sslmode": "prefer", "db": "unified-db"}'
+        volumeMounts:
+          - mountPath: /var/lib/pgadmin
+            name: pg-admin   
   # Volume Claim
   volumeClaimTemplates:
   - metadata:
@@ -42,3 +57,12 @@ spec:
       resources:
         requests:
           storage: 5Gi
+  - metadata:
+      name: pg-admin
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "local-storage"
+      resources:
+        requests:
+          storage: 0.25Gi
+  
