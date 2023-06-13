@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgresql-db
+spec:
+  selector:
+    matchLabels:
+      app: postgresql-db
+  serviceName: postgresql-db-service
+  replicas: 2
+  minReadySeconds: 60 # by default is 0
+  template:
+    metadata:
+      labels:
+        app: postgresql-db
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: postgresql-db
+        image: postgis/postgis:15-3.3
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: postgresql-db-data
+          mountPath: /data
+        env:
+        - name: POSTGRES_USER
+          value: unifier
+        - name: POSTGRES_PASSWORD
+          value: unifier
+        - name: POSTGRES_DB
+          value: unified-db
+        - name: PGDATA
+          value: /data/pgdata
+  # Volume Claim
+  volumeClaimTemplates:
+  - metadata:
+      name: postgresql-db-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "local-storage"
+      resources:
+        requests:
+          storage: 5Gi
