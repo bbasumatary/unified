@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: pg-service
   labels:
-    app: pg-db
+    app: pgdb
 spec:
   selector:
-    app: pg-db
+    app: pgdb
   ports:
   - port: 5432
     targetPort: 5432
