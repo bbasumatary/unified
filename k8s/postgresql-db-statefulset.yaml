@@ -8,7 +8,7 @@ spec:
       app: pgdb
   serviceName: pg-service
   replicas: 1
-  # revisionHistoryLimit: 1
+  revisionHistoryLimit: 1
   minReadySeconds: 60 # by default is 0
   template:   # template of a pod in the statefulset
     metadata:
