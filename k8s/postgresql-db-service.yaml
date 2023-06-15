@@ -13,7 +13,7 @@ spec:
     targetPort: 5432
   - port: 5050
     name: pgadmin-port
-    targetPort: 5050
+    targetPort: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
