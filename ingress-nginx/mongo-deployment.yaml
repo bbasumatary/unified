@@ -97,9 +97,9 @@ kind: Service
 metadata:
   name: mongo-express-service
 spec:
-  type: ClusterIP
   selector:
     app: mongo-express
+  type: LoadBalancer
   ports:
   - protocol: TCP
     port: 8081
