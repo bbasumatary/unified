@@ -13,4 +13,22 @@ spec:
     targetPort: 5432
   - port: 5050
     name: pgadmin-port
-    targetPort: 80
+    targetPort: 5050
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pg-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /pgadmin
+        backend:
+          service:
+            name: pg-service
+            port:
+              number: 5050
