@@ -77,9 +77,11 @@ spec:
               secretKeyRef:
                 name: mongodb-secret
                 key: mongo-root-password
-        envFrom:
-          - configMapRef:
-              name: mongo-express-configmap
+          - name: ME_CONFIG_MONGODB_SERVER
+            value: "mongodb-service"
+        # envFrom:
+        #   - configMapRef:
+        #       name: mongo-express-configmap
         resources:
           requests:
             memory: "32Mi"
