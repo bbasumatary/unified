@@ -18,6 +18,10 @@
 vendor/
 cluster/
 
-
 # Go workspace file
 go.work
+
+
+# Custom for the repo
+.commands
+Dockerfile
