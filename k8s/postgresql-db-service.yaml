@@ -31,4 +31,4 @@ spec:
           service:
             name: pg-service
             port:
-              number: 80
+              number: 5050
